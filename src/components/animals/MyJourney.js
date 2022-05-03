@@ -1,4 +1,4 @@
-// This components is going to display all cheeses in a list
+// This components is going to display all animals in a list
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -67,6 +67,14 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney })
     setCurrentAnimal(null)
   }
 
+  const resetJourney = () => {
+    console.log('back to journey list fires')
+
+    setMyJourney([])
+    navigate('../animals')
+
+  }
+
   return (
     <Container className='animal-list'>
       <Row>
@@ -122,6 +130,9 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney })
                   </Col>
                 )
               })}
+              <div className="buttons-wrapper mb-4 reset">
+                <Button variant="danger" onClick={resetJourney}>Reset Journey</Button>
+              </div>
             </>
           :
           <>
