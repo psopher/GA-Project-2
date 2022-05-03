@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -10,10 +10,22 @@ import Nav from 'react-bootstrap/Nav'
 // Import helpers
 import { userIsAuthenticated } from '../../helpers/auth'
 
-const PageNavBar = () => {
+const PageNavBar = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney }) => {
 
   // Navigate
   const navigate = useNavigate()
+
+  useEffect(() => {
+
+    console.log('current animal ->', currentAnimal)
+
+  }, [currentAnimal])
+
+  const resetCurrentAnimal = () => {
+    console.log('reset current animal fires')
+
+    setCurrentAnimal(null)
+  }
 
   return (
     <Navbar bg="dark" expand="sm">
@@ -24,9 +36,9 @@ const PageNavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {/* Navbar collapses in mobile formats */}
         <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
-          <Nav.Link as={Link} to="/animals">Animals</Nav.Link>
+          <Nav.Link as={Link} to="/animals" onClick={resetCurrentAnimal}>Animals</Nav.Link>
           {/* TO DO: My journey will only appear if there are animals you have seen*/}
-          <Nav.Link as={Link} to="/myjourney">My Journey</Nav.Link>
+          <Nav.Link as={Link} to="/myjourney" onClick={resetCurrentAnimal}>My Journey</Nav.Link>
         </Navbar.Collapse>
       </Container>
     </Navbar>

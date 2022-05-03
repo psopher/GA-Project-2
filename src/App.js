@@ -7,7 +7,6 @@ import Home from './components/Home'
 import PageNavBar from './components/common/PageNavBar'
 import NotFound from './components/common/NotFound'
 
-import AnimalShow from './components/animals/AnimalShow'
 import AnimalsIndex from './components/animals/AnimalsIndex'
 import MyJourney from './components/animals/MyJourney'
 
@@ -16,22 +15,14 @@ import MyJourney from './components/animals/MyJourney'
 const App = () => {
 
   const [ myJourney, setMyJourney ] = useState([])
-  const [ currentAnimal, setCurrentAnimal ] = useState({
-    id: '',
-    name: '',
-    type: '',
-    image: '',
-    latinName: '',
-    habitat: '',
-    diet: '',
-    geoRange: '',
-  })
+  // const [ myJourneyIDs, setMyJourneyIDs ] = useState([])
+  const [ currentAnimal, setCurrentAnimal ] = useState(null)
 
   return (
     <main className="site-wrapper">
       <BrowserRouter>
         {/* Navbar appears on every page */}
-        <PageNavBar />
+        <PageNavBar setCurrentAnimal={setCurrentAnimal} currentAnimal={currentAnimal} setMyJourney={setMyJourney} myJourney={myJourney} />
 
         {/* Everything inside routes are separate pages */}
         <Routes>
@@ -39,7 +30,6 @@ const App = () => {
 
           {/* Animal Routes */}
           <Route path="/animals" element={<AnimalsIndex setCurrentAnimal={setCurrentAnimal} currentAnimal={currentAnimal} setMyJourney={setMyJourney} myJourney={myJourney} />} />
-          <Route path="/animals/:id" element={<AnimalShow setCurrentAnimal={setCurrentAnimal} currentAnimal={currentAnimal} setMyJourney={setMyJourney} myJourney={myJourney} />} />
           <Route path="/myjourney" element={<MyJourney setCurrentAnimal={setCurrentAnimal} currentAnimal={currentAnimal} setMyJourney={setMyJourney} myJourney={myJourney} />}/>
 
           {/* Not Found */}
