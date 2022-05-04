@@ -16,7 +16,7 @@ import Button from 'react-bootstrap/Button'
 // Import spinner
 import Spinner from '../utilities/Spinner'
 
-const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney }) => {
+const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney, filters, types, handleChange, filteredJourney }) => {
 
   // Navigate
   const navigate = useNavigate()
@@ -43,18 +43,18 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney })
 
 
   const removeFromJourney = () => {
-    console.log('remove from journey fires')
+    // console.log('remove from journey fires')
     
     const filteredJourney = myJourney.filter((animal) => animal.id !== currentAnimal.id)
       
     setMyJourney(filteredJourney)
 
     if (filteredJourney.length > 0) {
-      console.log('filtered journey is greater than zero')
+      // console.log('filtered journey is greater than zero')
 
       setCurrentAnimal(null)
     } else {
-      console.log('filtered journey is less than zero')
+      // console.log('filtered journey is less than zero')
       navigate('../animals')
       setCurrentAnimal(null)
     }
@@ -62,13 +62,13 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney })
   }
 
   const backToJourneyList = () => {
-    console.log('back to journey list fires')
+    // console.log('back to journey list fires')
 
     setCurrentAnimal(null)
   }
 
   const resetJourney = () => {
-    console.log('back to journey list fires')
+    // console.log('back to journey list fires')
 
     setMyJourney([])
     navigate('../animals')
@@ -112,10 +112,20 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney })
             </>
             :
             <>
-              {myJourney.map((animal, index) => {
-                console.log('animal ->', animal)
+              <div className="filter-container">
+                {/* Types dropdown */}
+                <select name="type" value={filters.type} onChange={handleChange}>
+                  <option value="All">All</option>
+                  {/* Loop through animalTypes */}
+                  {types.map(type => <option key={type} value={type}>{type}</option>)}
+                </select>
+                {/* Search field */}
+                <input type="text" name="searchTerm" placeholder='Search...' value={filters.searchTerm} onChange={handleChange} />
+              </div>
+              {filteredJourney.map((animal, index) => {
+                // console.log('animal ->', animal)
                 const { id, name, type, image } = animal
-                
+
                 return (
                   <Col key={index} md="6" lg="6" className='animal mb-6'>
                     <Link to={'#'} >

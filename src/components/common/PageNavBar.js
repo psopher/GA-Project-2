@@ -10,19 +10,26 @@ import Nav from 'react-bootstrap/Nav'
 // Import helpers
 import { userIsAuthenticated } from '../../helpers/auth'
 
-const PageNavBar = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney }) => {
+const PageNavBar = ({ setCurrentAnimal, currentAnimal, setFilters }) => {
 
   // Navigate
   const navigate = useNavigate()
 
   useEffect(() => {
 
-    console.log('current animal ->', currentAnimal)
+    // console.log('current animal ->', currentAnimal)
 
   }, [currentAnimal])
 
   const resetCurrentAnimal = () => {
     console.log('reset current animal fires')
+
+    const filtersDefault = {
+      type: 'All',
+      searchTerm: '',
+    }
+
+    setFilters(filtersDefault)
 
     setCurrentAnimal(null)
   }

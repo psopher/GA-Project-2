@@ -58,9 +58,8 @@ const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney
     }
     setCurrentAnimal(newAnimal)
 
-    if (!myJourney.includes(newAnimal)) {
-      setMyJourney([...myJourney, newAnimal])
-    }
+    const filteredJourney = myJourney.filter((animal) => animal.id !== newAnimal.id)
+    setMyJourney([...filteredJourney, newAnimal])
 
     // console.log('current animal ->', currentAnimal)
 
@@ -68,10 +67,10 @@ const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney
 
   useEffect(() => {
 
-    console.log('current animal ->', currentAnimal)
-    console.log('my journey ->', myJourney)
+    // console.log('current animal ->', currentAnimal)
+    // console.log('my journey ->', myJourney)
 
-  }, [currentAnimal, myJourney])
+  }, [ currentAnimal, myJourney ])
 
   const removeFromJourney = () => {
     console.log('remove from journey fires')
