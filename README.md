@@ -14,7 +14,7 @@ The interface includes 3 pages:
 * AnimalsIndex.js is a list of 10 randomly generated animals. If the user clicks on the animal, that animal is spotlighted at the same /animals endpoint. 
 * All clicked animals are added to the MyJourney.js page, in case the user wants revisit an animal she specifically liked. As with AnimalsIndex.js, in MyJourney.js, a clicked animal is spotlighted at the same /myjourney endpoint 
 
-Are you curious to see the end result? [Check out the site.](https://psopher.github.io/Minesweeper/) 
+Are you curious to see the end result? [Check out the site.](https://a-day-at-the-zoo.netlify.app/) 
 
 ---
 ### Brief
