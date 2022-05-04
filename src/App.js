@@ -15,8 +15,9 @@ import MyJourney from './components/animals/MyJourney'
 const App = () => {
 
   const [ myJourney, setMyJourney ] = useState([])
-  // const [ myJourneyIDs, setMyJourneyIDs ] = useState([])
   const [ currentAnimal, setCurrentAnimal ] = useState(null)
+
+  // Filter variables
   const [ filters, setFilters ] = useState({
     type: 'All',
     searchTerm: '',
@@ -24,10 +25,7 @@ const App = () => {
   const [ filteredJourney, setFilteredJourney ] = useState([])
   const [ types, setTypes ] = useState([])
 
-
-  // ? handleChange updates filter state
   const handleChange = (e) => {
-    // console.log('handle change event target value ->', e.target.value)
     const newObj = {
       ...filters,
       [e.target.name]: e.target.value,
@@ -36,7 +34,6 @@ const App = () => {
     setFilters(newObj)
   }
 
-  // ? useEffect that creates our types dropdown options
   useEffect(() => {
     // Checking there are types to loop through in the first place
     // On initial page load, types will be empty, so we don't need to create a list
@@ -47,7 +44,6 @@ const App = () => {
     }
   }, [myJourney])
 
-  // ? useEffect that filters the animals and adds them as a filteredTypes state
   useEffect(() => {
     // Only filter myJourney if there are animals to filter
     if (myJourney.length){

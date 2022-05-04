@@ -1,6 +1,5 @@
 // This components is going to display all animals in a list
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 
 import { useNavigate } from 'react-router-dom'
 
@@ -12,9 +11,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-
-// Import spinner
-import Spinner from '../utilities/Spinner'
 
 const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney, filters, types, handleChange, filteredJourney }) => {
 
@@ -36,25 +32,18 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney, f
       geoRange: geoRange,
     }
     setCurrentAnimal(newAnimal)
-
-    // console.log('current animal ->', currentAnimal)
-
   }
 
 
   const removeFromJourney = () => {
-    // console.log('remove from journey fires')
     
     const filteredJourney = myJourney.filter((animal) => animal.id !== currentAnimal.id)
       
     setMyJourney(filteredJourney)
 
     if (filteredJourney.length > 0) {
-      // console.log('filtered journey is greater than zero')
-
       setCurrentAnimal(null)
     } else {
-      // console.log('filtered journey is less than zero')
       navigate('../animals')
       setCurrentAnimal(null)
     }
@@ -62,25 +51,20 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney, f
   }
 
   const backToJourneyList = () => {
-    // console.log('back to journey list fires')
-
     setCurrentAnimal(null)
   }
 
   const resetJourney = () => {
-    // console.log('back to journey list fires')
-
     setMyJourney([])
     navigate('../animals')
-
   }
 
   return (
     <Container className='animal-list'>
-      <Row>
-        { myJourney.length > 0 ?
-          currentAnimal ? 
-            <>
+      { myJourney.length > 0 ?
+        currentAnimal ? 
+          <>
+            <Row className="show-container">
               <Col xs="12">
                 <h1>{currentAnimal.name}</h1>
                 <hr />
@@ -109,9 +93,11 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney, f
                   <Button variant="danger" onClick={removeFromJourney}>Remove from Journey</Button>
                 </div>
               </Col>
-            </>
-            :
-            <>
+            </Row>
+          </>
+          :
+          <>
+            <Row>
               <div className="filter-container">
                 {/* Types dropdown */}
                 <select name="type" value={filters.type} onChange={handleChange}>
@@ -143,13 +129,13 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney, f
               <div className="buttons-wrapper mb-4 reset">
                 <Button variant="danger" onClick={resetJourney}>Reset Journey</Button>
               </div>
-            </>
-          :
-          <>
-            <h3>Start looking through animals, and your journey will be chronicled here</h3>
+            </Row>
           </>
-        }
-      </Row>
+        :
+        <>
+          <h3>Start looking through animals, and your journey will be chronicled here</h3>
+        </>
+      }
     </Container>
   )
 }

@@ -13,20 +13,12 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
-// Import spinner
-import Spinner from '../utilities/Spinner'
-
 const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney }) => {
 
   // Navigate
   const navigate = useNavigate()
 
   const [ animals, setAnimals ] = useState([])
-  const [ animalsListed, setAnimalsListed ] = useState([])
-  const [ errors, setErrors ] = useState(false)
-  const [ selected, setSelected] = useState([])
-  const [ single, setSingle ] = useState(false)
-
 
   useEffect(() => {
 
@@ -60,9 +52,6 @@ const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney
 
     const filteredJourney = myJourney.filter((animal) => animal.id !== newAnimal.id)
     setMyJourney([...filteredJourney, newAnimal])
-
-    // console.log('current animal ->', currentAnimal)
-
   }
 
   useEffect(() => {
@@ -73,18 +62,15 @@ const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney
   }, [ currentAnimal, myJourney ])
 
   const removeFromJourney = () => {
-    console.log('remove from journey fires')
-    
+
     const filteredJourney = myJourney.filter((animal) => animal.id !== currentAnimal.id)
       
     setMyJourney(filteredJourney)
     
     setCurrentAnimal(null)
-
   }
 
   const backToAnimalsList = () => {
-    console.log('back to animals list fires')
 
     setCurrentAnimal(null)
   }
@@ -92,20 +78,18 @@ const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney
 
   return (
     <Container className='animal-list'>
-      <Row>
-        { currentAnimal ? 
-          <>
+      { currentAnimal ? 
+        <>
+          <Row className="show-container">
             <Col xs="12">
-              <h1>{currentAnimal.name}</h1>
+              <h1 className="show-title">{currentAnimal.name}</h1>
+              <p className="latin-name">{currentAnimal.latinName}</p>
               <hr />
             </Col>
             <Col md="6">
               <img src={currentAnimal.image} alt={currentAnimal.name} />
             </Col>
             <Col md="6">
-              <h4><span>🏛</span> Latin Name</h4>
-              <p>{currentAnimal.latinName}</p>
-              <hr />
               <h4><span>🏞</span> Habitat</h4>
               <p>{currentAnimal.habitat}</p>
               <hr />
@@ -123,29 +107,41 @@ const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney
                 <Button variant="danger" onClick={removeFromJourney}>Remove from Journey</Button>
               </div>
             </Col>
-          </>
-          :
-          <>
+          </Row>
+        </>
+        :
+        <>
+          <Row>
             {animals.map((animal, index) => {
               const { id, name, animal_type: type, image_link: image } = animal
               
+              const animalsSeen = myJourney.filter((filteredAnimal) => filteredAnimal.id === id)
+              
+              console.log('animalsSeen ->', animalsSeen)
+
+              let seen = ''
+              if (animalsSeen.length > 0) {
+                seen = 'seen'
+              } else {
+                seen = 'not-seen'
+              }
+
               return (
                 <Col key={index} md="6" lg="6" className='animal mb-6'>
                   <Link to={'#'} >
                     <Card onClick={() => handleClick(animal)}>
-
                       <Card.Img variant="top" src={image}  />
                       <Card.Body className='bg-light'>
-                        <Card.Title className='text-center mb-0'>{name} - {type}</Card.Title>
+                        <Card.Title className={'text-center mb-0' + ' ' + (seen)}>{name} <br /> <span>{type}</span> {seen === 'seen' ? <p clasName="check-seen">✓</p> : <></> }</Card.Title>
                       </Card.Body>
                     </Card>
                   </Link>
                 </Col>
               )
             })}
-          </>
-        }
-      </Row>
+          </Row>
+        </>
+      }
     </Container>
   )
 }

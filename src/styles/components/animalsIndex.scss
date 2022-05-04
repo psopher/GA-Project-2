@@ -2,6 +2,11 @@
   margin-bottom: 30px;
   margin-top: 30px;
 
+  .show-container{
+    background: white;
+    padding: 30px;
+    @extend %box-style;
+  }
   button {
     margin-right: 20px;
     margin-bottom: 10px;
@@ -13,6 +18,32 @@
     margin-top: 30px;
   }
 
+  .filter-container{
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+
+    select{
+      margin-right: 25px;
+      width: 185px;
+      border: $border-style;
+    }
+
+    input{
+      border: $border-style;
+    }
+  }
+
+  .show-title{
+    margin-bottom: 0px;
+  }
+
+  .latin-name{
+    font-weight: 200;
+    font-style: italic;
+    font-size: 20px;
+  }
+
   .animal{
     margin-bottom: 20px;
     >a{
@@ -20,7 +51,7 @@
       color: #000;
     }
     .card{
-      box-shadow: 0px 2px 8px rgb(0,0,0,0.2);
+      @extend %box-style;
     
       .card-img-top{
         width: 100%;
@@ -29,7 +60,7 @@
       }
 
       .card-body{
-        border-top: 2px black solid; 
+        border-top: $border-style;
         white-space: nowrap;
         max-width: 100%;
 
@@ -38,6 +69,24 @@
           text-overflow: ellipsis;
         }
 
+        .seen {
+          color: black;
+        }
+
+        .not-seen {
+          color: black;
+        }
+
+        span{
+          font-weight: 200;
+          font-style: italic;
+        }
+
+        p{
+          position: absolute;
+          right: 20px;
+          bottom: 15px;
+        }
       }
     }
   }
