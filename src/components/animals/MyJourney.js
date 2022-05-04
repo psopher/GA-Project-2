@@ -66,16 +66,14 @@ const MyJourney = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney, f
           <>
             <Row className="show-container">
               <Col xs="12">
-                <h1>{currentAnimal.name}</h1>
+                <h1 className="show-title">{currentAnimal.name}</h1>
+                <p className="latin-name">{currentAnimal.latinName}</p>
                 <hr />
               </Col>
               <Col md="6">
                 <img src={currentAnimal.image} alt={currentAnimal.name} />
               </Col>
               <Col md="6">
-                <h4><span>🏛</span> Latin Name</h4>
-                <p>{currentAnimal.latinName}</p>
-                <hr />
                 <h4><span>🏞</span> Habitat</h4>
                 <p>{currentAnimal.habitat}</p>
                 <hr />

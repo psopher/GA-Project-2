@@ -132,7 +132,7 @@ const AnimalsIndex = ({ setCurrentAnimal, currentAnimal, setMyJourney, myJourney
                     <Card onClick={() => handleClick(animal)}>
                       <Card.Img variant="top" src={image}  />
                       <Card.Body className='bg-light'>
-                        <Card.Title className={'text-center mb-0' + ' ' + (seen)}>{name} <br /> <span>{type}</span> {seen === 'seen' ? <p clasName="check-seen">✓</p> : <></> }</Card.Title>
+                        <Card.Title className={'text-center mb-0' + ' ' + (seen)}>{name} <br /> <span>{type}</span> {seen === 'seen' ? <p className="check-seen">✓</p> : <></> }</Card.Title>
                       </Card.Body>
                     </Card>
                   </Link>
